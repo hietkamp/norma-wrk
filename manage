@@ -1,0 +1,16 @@
+#!/bin/bash
+script_home="$( cd "$( dirname "$0" )" && pwd )"
+
+function toLower {
+  echo $(echo ${@} | tr '[:upper:]' '[:lower:]')
+}
+
+pushd "${script_home}" >/dev/null
+command=$(toLower ${1})
+shift || command=usage
+case "${command}" in
+    go)
+        go run main.go
+        ;;
+esac
+popd >/dev/null
